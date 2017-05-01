@@ -12,16 +12,18 @@ class Loader {
     }
 
     getVideos(fn) {
-        let url = `https://www.googleapis.com/youtube/v3/search?pageToken=${this.nextPage}&part=snippet&maxResults=${this.videoCount}&q=${this.value}&key=${this.apiKey}`;
-        fetch(url)
-            .then(response => response.json())
-            .then(response => {
-                console.log(response);
-                this.nextPage = response.nextPageToken;
-                return response.items;
-            })
-            .then(items => items.map(video => this.makeObject(video)))
-            .then(videos => this.addStatistic(videos, fn)).catch(err => console.log(err));
+        if (this.nextPage != undefined) {
+            let url = `https://www.googleapis.com/youtube/v3/search?pageToken=${this.nextPage}&part=snippet&maxResults=${this.videoCount}&q=${this.value}&key=${this.apiKey}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    this.nextPage = response.nextPageToken;
+                    return response.items;
+                })
+                .then(items => items.map(video => this.makeObject(video)))
+                .then(videos => this.addStatistic(videos, fn)).catch(err => console.log(err));
+        }
     }
 
     //		trgew
