@@ -89,15 +89,15 @@ class Layout {
     }
 
     renderTitle(li, title, href) {
-        let title = document.createElement('div');
+        let titleDiv = document.createElement('div');
         let a = document.createElement('a');
         let h3 = document.createElement('h3');
 
-        li.appendChild(title);
-        title.appendChild(a);
+        li.appendChild(titleDiv);
+        titleDiv.appendChild(a);
         a.appendChild(h3);
 
-        title.classList.add('title-video');
+        titleDiv.classList.add('title-video');
         a.setAttribute('href', href);
         h3.innerHTML = title;
     }
