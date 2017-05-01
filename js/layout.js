@@ -60,14 +60,14 @@ class Layout {
 
     renderSlide(slide) {
     	let slides = document.getElementById('slides');
-        let slideDiv = document.createElement('div');
+        let slide = document.createElement('div');
         let videos = document.createElement('ul');
 
-        slides.appendChild(slideDiv);
-        slideDiv.appendChild(videos);
+        slides.appendChild(slide);
+        slide.appendChild(videos);
 
-        slideDiv.classList.add('slide');
-        slideDiv.style.left = (slides.children.length-1) * document.documentElement.clientWidth + 'px';
+        slide.classList.add('slide');
+        slide.style.left = (slides.children.length-1) * document.documentElement.clientWidth + 'px';
 
         videos.classList.add('videos');
         slide.forEach(item => {
@@ -89,15 +89,15 @@ class Layout {
     }
 
     renderTitle(li, title, href) {
-        let titleDiv = document.createElement('div');
+        let title = document.createElement('div');
         let a = document.createElement('a');
         let h3 = document.createElement('h3');
 
-        li.appendChild(titleDiv);
-        titleDiv.appendChild(a);
+        li.appendChild(title);
+        title.appendChild(a);
         a.appendChild(h3);
 
-        titleDiv.classList.add('title-video');
+        title.classList.add('title-video');
         a.setAttribute('href', href);
         h3.innerHTML = title;
     }
