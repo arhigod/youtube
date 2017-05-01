@@ -21,7 +21,7 @@ class Loader {
                 return response.items;
             })
             .then(items => items.map(video => this.makeObject(video)))
-            .then(videos => this.addStatistic(videos, fn));
+            .then(videos => this.addStatistic(videos, fn)).catch(err => console.log(err));
     }
 
     //		trgew
@@ -47,7 +47,7 @@ class Loader {
                     .then(response => {
                         item.views = response.items[0].statistics.viewCount;
                         fn(item);
-                    });
+                    }).catch(err => console.log(err));
             }
         });
     }
