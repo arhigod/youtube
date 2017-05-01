@@ -60,14 +60,14 @@ class Layout {
 
     renderSlide(slide) {
     	let slides = document.getElementById('slides');
-        let slide = document.createElement('div');
+        let slideDiv = document.createElement('div');
         let videos = document.createElement('ul');
 
-        slides.appendChild(slide);
-        slide.appendChild(videos);
+        slides.appendChild(slideDiv);
+        slideDiv.appendChild(videos);
 
-        slide.classList.add('slide');
-        slide.style.left = (slides.children.length-1) * document.documentElement.clientWidth + 'px';
+        slideDiv.classList.add('slide');
+        slideDiv.style.left = (slides.children.length-1) * document.documentElement.clientWidth + 'px';
 
         videos.classList.add('videos');
         slide.forEach(item => {
