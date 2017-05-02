@@ -372,7 +372,6 @@ var Loader = function () {
                     description: item.snippet.description
                 };
             }
-            console.log('qwe');
             return false;
         }
     }, {

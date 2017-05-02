@@ -40,7 +40,6 @@ class Loader {
                 description: item.snippet.description
             };
         }
-        console.log('qwe');
         return false;
     }
 
