@@ -201,7 +201,7 @@ var Layout = function () {
             li.appendChild(img);
 
             img.classList.add('img');
-            img.style.background = 'url(' + imgUrl + ') no-repeat';
+            img.style.background = 'url(' + imgUrl + ') center no-repeat';
         }
     }, {
         key: 'renderData',

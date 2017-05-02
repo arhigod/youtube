@@ -1,6 +1,6 @@
 body {
     overflow-x: hidden;
-    background-color: grey;
+    background-image: url('../img/background.png');
 }
 
 p {
