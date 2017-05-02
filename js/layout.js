@@ -82,7 +82,7 @@ class Layout {
 
         videos.appendChild(li);
 
-        this.renderTitle(li, video.title, video.hrefYouTube);
+        this.renderTitle(li, video.title, video.href);
         this.renderImg(li, video.imgUrl);
         this.renderData(li, video.date, video.channel, video.views);
         this.renderDescription(li, video.description);

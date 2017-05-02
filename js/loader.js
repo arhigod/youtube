@@ -31,7 +31,7 @@ class Loader {
     makeObject(item) {
         return {
             videoId: item.id.videoId,
-            hrefYouTube: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+            href: `https://www.youtube.com/watch?v=${item.id.videoId}`,
             title: item.snippet.title,
             imgUrl: item.snippet.thumbnails.medium.url,
             channel: item.snippet.channelTitle,

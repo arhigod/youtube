@@ -38,11 +38,7 @@ class Slider {
         this.buffer.push(video);
         this.videosCount = this.videosInSlide();
         if (this.buffer.length === this.videosCount) {
-            if (this.slides.length === 0) {
-                this.slides.push(this.buffer);
-            } else {
-                this.slides.push(this.buffer);
-            }
+            this.slides.push(this.buffer);
             this.layout.renderSlide(this.slides[this.slides.length - 1]);
             this.layout.renderPages(this.getActiveSlideNumber() || 1, this.slides.length);
             this.buffer = [];
