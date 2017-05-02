@@ -4,6 +4,7 @@ class Loader {
         this.apiKey = 'AIzaSyBGHfTBX5QZMDjUoajJFd6hCRUKCPthHAg';
         this.nextPage = '';
         this.value = '';
+        this.loading = false;
     }
 
     newSearch(value) {

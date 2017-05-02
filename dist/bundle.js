@@ -323,6 +323,7 @@ var Loader = function () {
         this.apiKey = 'AIzaSyBGHfTBX5QZMDjUoajJFd6hCRUKCPthHAg';
         this.nextPage = '';
         this.value = '';
+        this.loading = false;
     }
 
     _createClass(Loader, [{
@@ -456,6 +457,7 @@ var Slider = function () {
     }, {
         key: 'pushVideo',
         value: function pushVideo(video) {
+            this.loader.loading = false;
             this.buffer.push(video);
             this.videosCount = this.videosInSlide();
             if (this.buffer.length === this.videosCount) {
@@ -478,7 +480,8 @@ var Slider = function () {
     }, {
         key: 'loadVideos',
         value: function loadVideos() {
-            if (this.getActiveSlideNumber() >= this.slides.length - 3) {
+            if (this.getActiveSlideNumber() >= this.slides.length - 3 && !this.loader.loading) {
+                this.loader.loading = true;
                 var that = this;
                 var fn = function fn(a) {
                     return that.pushVideo(a);

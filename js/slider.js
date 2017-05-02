@@ -35,6 +35,7 @@ class Slider {
     }
 
     pushVideo(video) {
+        this.loader.loading = false;
         this.buffer.push(video);
         this.videosCount = this.videosInSlide();
         if (this.buffer.length === this.videosCount) {
@@ -55,7 +56,8 @@ class Slider {
     }
 
     loadVideos() {
-        if (this.getActiveSlideNumber() >= this.slides.length - 3) {
+        if (this.getActiveSlideNumber() >= this.slides.length - 3 && !this.loader.loading) {
+            this.loader.loading = true;
             let that = this;
             let fn = function(a) {
                 return that.pushVideo(a);
