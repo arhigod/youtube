@@ -35,7 +35,6 @@ class Slider {
     }
 
     pushVideo(video) {
-        this.loader.loading = false;
         this.buffer.push(video);
         this.videosCount = this.videosInSlide();
         if (this.buffer.length === this.videosCount) {

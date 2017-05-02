@@ -344,6 +344,7 @@ var Loader = function () {
                 }).then(function (response) {
                     console.log(response);
                     _this.nextPage = response.nextPageToken;
+                    _this.loading = false;
                     return response.items;
                 }).then(function (items) {
                     return items.map(function (video) {
@@ -457,7 +458,6 @@ var Slider = function () {
     }, {
         key: 'pushVideo',
         value: function pushVideo(video) {
-            this.loader.loading = false;
             this.buffer.push(video);
             this.videosCount = this.videosInSlide();
             if (this.buffer.length === this.videosCount) {

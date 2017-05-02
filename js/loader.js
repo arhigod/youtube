@@ -20,6 +20,7 @@ class Loader {
                 .then(response => {
                     console.log(response);
                     this.nextPage = response.nextPageToken;
+                    this.loading = false;
                     return response.items;
                 })
                 .then(items => items.map(video => this.makeObject(video)))
