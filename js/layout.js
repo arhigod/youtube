@@ -17,8 +17,8 @@ class Layout {
         document.body.appendChild(header);
         header.appendChild(search);
         search.appendChild(input);
-        search.appendChild(searchButton);        
-        searchButton.appendChild(i);        
+        search.appendChild(searchButton);
+        searchButton.appendChild(i);
 
         search.classList.add('search');
 
@@ -59,7 +59,7 @@ class Layout {
     /////////////////////////////////////////////////////////////////
 
     renderSlide(slide) {
-    	let slides = document.getElementById('slides');
+        let slides = document.getElementById('slides');
         let slideDiv = document.createElement('div');
         let videos = document.createElement('ul');
 
@@ -67,7 +67,7 @@ class Layout {
         slideDiv.appendChild(videos);
 
         slideDiv.classList.add('slide');
-        slideDiv.style.left = (slides.children.length-1) * document.documentElement.clientWidth + 'px';
+        slideDiv.style.left = (slides.children.length - 1) * document.documentElement.clientWidth + 'px';
 
         videos.classList.add('videos');
         slide.forEach(item => {
@@ -181,14 +181,14 @@ class Layout {
     renderPages(activ, count) {
         let pages = document.getElementById('pages');
         pages.innerHTML = '';
-        for (let i = Math.max(1, activ - 2); i <= Math.min(Math.max(1, activ - 2)+4, count); i++) {
+        for (let i = Math.max(1, activ - 2); i <= Math.min(Math.max(1, activ - 2) + 4, count); i++) {
             let li = document.createElement('li');
             let a = document.createElement('a');
 
             pages.appendChild(li);
             li.appendChild(a);
 
-            if (activ==i) li.classList.add('active');
+            if (activ == i) li.classList.add('active');
             a.innerHTML = i;
         }
     }
@@ -201,3 +201,5 @@ class Layout {
     }
 
 }
+
+module.exports = Layout;

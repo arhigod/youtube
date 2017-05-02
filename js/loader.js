@@ -29,20 +29,24 @@ class Loader {
     //		trgew
 
     makeObject(item) {
-        return {
-            videoId: item.id.videoId,
-            href: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-            title: item.snippet.title,
-            imgUrl: item.snippet.thumbnails.medium.url,
-            channel: item.snippet.channelTitle,
-            date: item.snippet.publishedAt.substr(0, 10),
-            description: item.snippet.description
-        };
+        if (item.snippet.thumbnails) {
+            return {
+                videoId: item.id.videoId,
+                href: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+                title: item.snippet.title,
+                imgUrl: item.snippet.thumbnails.medium.url,
+                channel: item.snippet.channelTitle,
+                date: item.snippet.publishedAt.substr(0, 10),
+                description: item.snippet.description
+            };
+        }
+        console.log('qwe');
+        return false;
     }
 
     addStatistic(videos, fn) {
         videos.forEach((item) => {
-            if (item.videoId) {
+            if (item && item.videoId) {
                 let url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${item.videoId}&key=${this.apiKey}`;
                 fetch(url)
                     .then(response => response.json())
@@ -54,3 +58,5 @@ class Loader {
         });
     }
 }
+
+module.exports = Loader;

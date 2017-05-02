@@ -4,7 +4,7 @@ class Slider {
         this.layout = layout;
         this.slides = [];
         this.buffer = [];
-        this.videosCount = 4;     
+        this.videosCount = 4;
     }
 
     init() {
@@ -111,7 +111,7 @@ class Slider {
         });
         document.getElementById('slides').addEventListener('mousemove', e => {
             if (this.mouseDown) {
-                document.getElementById('slides').style.left = this.startSwipeSlidesPos - this.startSwipe + e.pageX +'px';
+                document.getElementById('slides').style.left = this.startSwipeSlidesPos - this.startSwipe + e.pageX + 'px';
             }
         });
         document.addEventListener('mouseup', (e) => {
@@ -124,7 +124,7 @@ class Slider {
                     this.slideMove(this.getActiveSlideNumber() + 1);
                 } else {
                     this.slideMove(this.getActiveSlideNumber());
-                }                
+                }
             }
         });
     }
@@ -138,7 +138,7 @@ class Slider {
         });
         document.getElementById('slides').addEventListener('touchmove', e => {
             if (this.mouseDown) {
-                document.getElementById('slides').style.left = this.startSwipeSlidesPos - this.startSwipe + e.changedTouches[0].pageX +'px';
+                document.getElementById('slides').style.left = this.startSwipeSlidesPos - this.startSwipe + e.changedTouches[0].pageX + 'px';
             }
         });
         document.addEventListener('touchend', (e) => {
@@ -151,7 +151,7 @@ class Slider {
                     this.slideMove(this.getActiveSlideNumber() + 1);
                 } else {
                     this.slideMove(this.getActiveSlideNumber());
-                }                
+                }
             };
         });
     }
@@ -169,3 +169,5 @@ class Slider {
     }
 
 }
+
+module.exports = Slider;
