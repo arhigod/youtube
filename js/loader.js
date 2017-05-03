@@ -24,7 +24,7 @@ class Loader {
                     return response.items;
                 })
                 .then(items => items.map(video => this.makeObject(video)))
-                .then(videos => this.addStatistic(videos, fn)).catch(err => console.log(err));
+                .then(videos => this.addStatisticAndPush(videos, fn)).catch(err => console.log(err));
         }
     }
 
@@ -45,7 +45,7 @@ class Loader {
         return false;
     }
 
-    addStatistic(videos, fn) {
+    addStatisticAndPush(videos, fn) {
         videos.forEach((item) => {
             if (item && item.videoId) {
                 let url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${item.videoId}&key=${this.apiKey}`;

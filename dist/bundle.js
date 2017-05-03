@@ -278,7 +278,9 @@ var Layout = function () {
         value: function renderPages(activ, count) {
             var pages = document.getElementById('pages');
             pages.innerHTML = '';
-            for (var i = Math.max(1, activ - 2); i <= Math.min(Math.max(1, activ - 2) + 4, count); i++) {
+            var leftPage = document.documentElement.clientWidth < 461 ? Math.max(1, activ - 1) : Math.max(1, activ - 2);
+            var rightPage = document.documentElement.clientWidth < 461 ? Math.min(Math.max(1, activ - 1) + 2, count) : Math.min(Math.max(1, activ - 2) + 4, count);
+            for (var i = leftPage; i <= rightPage; i++) {
                 var li = document.createElement('li');
                 var a = document.createElement('a');
 
@@ -351,7 +353,7 @@ var Loader = function () {
                         return _this.makeObject(video);
                     });
                 }).then(function (videos) {
-                    return _this.addStatistic(videos, fn);
+                    return _this.addStatisticAndPush(videos, fn);
                 }).catch(function (err) {
                     return console.log(err);
                 });
@@ -377,8 +379,8 @@ var Loader = function () {
             return false;
         }
     }, {
-        key: 'addStatistic',
-        value: function addStatistic(videos, fn) {
+        key: 'addStatisticAndPush',
+        value: function addStatisticAndPush(videos, fn) {
             var _this2 = this;
 
             videos.forEach(function (item) {
@@ -432,13 +434,16 @@ var Slider = function () {
     }, {
         key: 'newSearch',
         value: function newSearch() {
-            this.clearSlides();
-            this.loader.newSearch(document.getElementById('search-input').value);
-            var that = this;
-            var fn = function fn(a) {
-                return that.pushVideo(a);
-            };
-            this.loader.getVideos(fn);
+            if (!this.loader.loading) {
+                this.loader.loading = true;
+                this.clearSlides();
+                this.loader.newSearch(document.getElementById('search-input').value);
+                var that = this;
+                var fn = function fn(a) {
+                    return that.pushVideo(a);
+                };
+                this.loader.getVideos(fn);
+            }
         }
     }, {
         key: 'clearSlides',

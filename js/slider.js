@@ -12,13 +12,16 @@ class Slider {
     }
 
     newSearch() {
-        this.clearSlides();
-        this.loader.newSearch(document.getElementById('search-input').value);
-        let that = this;
-        let fn = function(a) {
-            return that.pushVideo(a);
+        if (!this.loader.loading) {
+            this.loader.loading = true;
+            this.clearSlides();
+            this.loader.newSearch(document.getElementById('search-input').value);
+            let that = this;
+            let fn = function(a) {
+                return that.pushVideo(a);
+            }
+            this.loader.getVideos(fn);
         }
-        this.loader.getVideos(fn);
     }
 
     clearSlides() {

@@ -181,7 +181,9 @@ class Layout {
     renderPages(activ, count) {
         let pages = document.getElementById('pages');
         pages.innerHTML = '';
-        for (let i = Math.max(1, activ - 2); i <= Math.min(Math.max(1, activ - 2) + 4, count); i++) {
+        let leftPage = document.documentElement.clientWidth < 461 ? Math.max(1, activ - 1) : Math.max(1, activ - 2);
+        let rightPage = document.documentElement.clientWidth < 461 ? Math.min(Math.max(1, activ - 1) + 2, count) : Math.min(Math.max(1, activ - 2) + 4, count);
+        for (let i = leftPage; i <= rightPage; i++) {
             let li = document.createElement('li');
             let a = document.createElement('a');
 
