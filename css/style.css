@@ -162,16 +162,16 @@ i {
     background: pink;
 }
 
-.active {
-    color: #fff !important;
-    background: #cc181e !important;
+.pages li.active {
+    color: #fff;
+    background: #cc181e;
 }
 
 
 /*	cc181e	*/
 
 
-@media (max-device-width: 460px) and (orientation: portrait){
+@media (max-device-width: 460px){
 	.pages {
 		width: 276px;
 	}

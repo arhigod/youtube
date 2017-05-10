@@ -317,6 +317,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var Video = __webpack_require__(4);
+
 var Loader = function () {
     function Loader() {
         _classCallCheck(this, Loader);
@@ -350,7 +352,7 @@ var Loader = function () {
                     return response.items;
                 }).then(function (items) {
                     return items.map(function (video) {
-                        return _this.makeObject(video);
+                        return video.snippet.thumbnails && video.id.videoId ? new Video(video) : false;
                     });
                 }).then(function (videos) {
                     return _this.addStatisticAndPush(videos, fn);
@@ -363,34 +365,18 @@ var Loader = function () {
         //		trgew
 
     }, {
-        key: 'makeObject',
-        value: function makeObject(item) {
-            if (item.snippet.thumbnails) {
-                return {
-                    videoId: item.id.videoId,
-                    href: 'https://www.youtube.com/watch?v=' + item.id.videoId,
-                    title: item.snippet.title,
-                    imgUrl: item.snippet.thumbnails.medium.url,
-                    channel: item.snippet.channelTitle,
-                    date: item.snippet.publishedAt.substr(0, 10),
-                    description: item.snippet.description
-                };
-            }
-            return false;
-        }
-    }, {
         key: 'addStatisticAndPush',
         value: function addStatisticAndPush(videos, fn) {
             var _this2 = this;
 
-            videos.forEach(function (item) {
-                if (item && item.videoId) {
-                    var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id=' + item.videoId + '&key=' + _this2.apiKey;
+            videos.forEach(function (video) {
+                if (video) {
+                    var url = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id=' + video.videoId + '&key=' + _this2.apiKey;
                     fetch(url).then(function (response) {
                         return response.json();
                     }).then(function (response) {
-                        item.views = response.items[0].statistics.viewCount;
-                        fn(item);
+                        video.addStatistic(response);
+                        fn(video);
                     }).catch(function (err) {
                         return console.log(err);
                     });
@@ -456,9 +442,7 @@ var Slider = function () {
         key: 'videosInSlide',
         value: function videosInSlide() {
             if (document.documentElement.clientWidth <= 647) return 1;
-            if (document.documentElement.clientWidth <= 951) return 2;
-            if (document.documentElement.clientWidth <= 1255) return 3;
-            return 4;
+            return Math.ceil((document.documentElement.clientWidth - 647) / 304) + 1;
         }
     }, {
         key: 'pushVideo',
@@ -612,6 +596,7 @@ var Slider = function () {
             window.addEventListener('resize', function () {
                 var leftVideo = _this5.videosCount * (_this5.getActiveSlideNumber() - 1) + 1;
                 var slides = _this5.slides;
+                slides.push(_this5.buffer);
                 _this5.clearSlides();
                 slides.forEach(function (slide) {
                     return slide.forEach(function (video) {
@@ -648,6 +633,42 @@ var loader = new Loader();
 
 var slider = new Slider(loader, layout);
 slider.init();
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Video = function () {
+    function Video(video) {
+        _classCallCheck(this, Video);
+
+        this.videoId = video.id.videoId;
+        this.href = "https://www.youtube.com/watch?v=" + video.id.videoId;
+        this.title = video.snippet.title;
+        this.imgUrl = video.snippet.thumbnails.medium.url;
+        this.channel = video.snippet.channelTitle;
+        this.date = video.snippet.publishedAt.substr(0, 10);
+        this.description = video.snippet.description;
+    }
+
+    _createClass(Video, [{
+        key: "addStatistic",
+        value: function addStatistic(statistic) {
+            this.views = statistic.items[0].statistics.viewCount;
+        }
+    }]);
+
+    return Video;
+}();
+
+module.exports = Video;
 
 /***/ })
 /******/ ]);

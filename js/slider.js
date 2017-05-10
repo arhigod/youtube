@@ -32,9 +32,7 @@ class Slider {
 
     videosInSlide() {
         if (document.documentElement.clientWidth <= 647) return 1;
-        if (document.documentElement.clientWidth <= 951) return 2;
-        if (document.documentElement.clientWidth <= 1255) return 3;
-        return 4;
+        return Math.ceil((document.documentElement.clientWidth - 647) / 304) + 1;
     }
 
     pushVideo(video) {
@@ -164,6 +162,7 @@ class Slider {
         window.addEventListener('resize', () => {
             let leftVideo = this.videosCount * (this.getActiveSlideNumber() - 1) + 1;
             let slides = this.slides;
+            slides.push(this.buffer);
             this.clearSlides();
             slides.forEach(slide => slide.forEach(video => this.pushVideo(video)));
             let newSlideId = Math.floor(leftVideo / this.videosInSlide() - 0.01);

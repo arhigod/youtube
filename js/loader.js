@@ -1,3 +1,4 @@
+const Video = require('./video');
 class Loader {
     constructor() {
         this.videoCount = 30;
@@ -23,37 +24,22 @@ class Loader {
                     this.loading = false;
                     return response.items;
                 })
-                .then(items => items.map(video => this.makeObject(video)))
+                .then(items => items.map(video => video.snippet.thumbnails && video.id.videoId ? new Video(video) : false))
                 .then(videos => this.addStatisticAndPush(videos, fn)).catch(err => console.log(err));
         }
     }
 
     //		trgew
 
-    makeObject(item) {
-        if (item.snippet.thumbnails) {
-            return {
-                videoId: item.id.videoId,
-                href: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-                title: item.snippet.title,
-                imgUrl: item.snippet.thumbnails.medium.url,
-                channel: item.snippet.channelTitle,
-                date: item.snippet.publishedAt.substr(0, 10),
-                description: item.snippet.description
-            };
-        }
-        return false;
-    }
-
     addStatisticAndPush(videos, fn) {
-        videos.forEach((item) => {
-            if (item && item.videoId) {
-                let url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${item.videoId}&key=${this.apiKey}`;
+        videos.forEach((video) => {
+            if (video) {
+                let url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${video.videoId}&key=${this.apiKey}`;
                 fetch(url)
                     .then(response => response.json())
                     .then(response => {
-                        item.views = response.items[0].statistics.viewCount;
-                        fn(item);
+                        video.addStatistic(response)
+                        fn(video);
                     }).catch(err => console.log(err));
             }
         });
