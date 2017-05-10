@@ -594,7 +594,7 @@ var Slider = function () {
             var _this5 = this;
 
             window.addEventListener('resize', function () {
-                var leftVideo = _this5.videosCount * (_this5.getActiveSlideNumber() - 1) + 1;
+                var leftVideo = _this5.videosCount * (_this5.getActiveSlideNumber() - 1) + 1 || 1;
                 var slides = _this5.slides;
                 slides.push(_this5.buffer);
                 _this5.clearSlides();

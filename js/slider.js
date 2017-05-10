@@ -160,7 +160,7 @@ class Slider {
 
     eventResize() {
         window.addEventListener('resize', () => {
-            let leftVideo = this.videosCount * (this.getActiveSlideNumber() - 1) + 1;
+            let leftVideo = this.videosCount * (this.getActiveSlideNumber() - 1) + 1 || 1;
             let slides = this.slides;
             slides.push(this.buffer);
             this.clearSlides();
