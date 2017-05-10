@@ -91,27 +91,6 @@ var Layout = function () {
             this.renderIframe();
         }
     }, {
-        key: 'renderIframe',
-        value: function renderIframe() {
-            var iframeBg = document.createElement('div');
-            var iframe = document.createElement('iframe');
-
-            document.body.appendChild(iframeBg);
-            document.body.appendChild(iframe);
-
-            iframeBg.setAttribute('id', 'iframeBg');
-            iframeBg.classList.add('iframeBg');
-            iframeBg.addEventListener('mousedown', function (e) {
-                iframe.style.visibility = 'hidden';
-                iframe.setAttribute('src', '');
-                iframeBg.style.visibility = 'hidden';
-            });
-
-            iframe.setAttribute('id', 'iframe');
-            iframe.setAttribute('frameborder', '0');
-            iframe.setAttribute('allowfullscreen', '');
-        }
-    }, {
         key: 'renderHeader',
         value: function renderHeader() {
             var header = document.createElement('header');
@@ -162,6 +141,27 @@ var Layout = function () {
 
             pages.classList.add('pages');
             pages.setAttribute('id', 'pages');
+        }
+    }, {
+        key: 'renderIframe',
+        value: function renderIframe() {
+            var iframeBg = document.createElement('div');
+            var iframe = document.createElement('iframe');
+
+            document.body.appendChild(iframeBg);
+            document.body.appendChild(iframe);
+
+            iframeBg.setAttribute('id', 'iframeBg');
+            iframeBg.classList.add('iframeBg');
+            iframeBg.addEventListener('mousedown', function (e) {
+                iframe.style.visibility = 'hidden';
+                iframe.setAttribute('src', '');
+                iframeBg.style.visibility = 'hidden';
+            });
+
+            iframe.setAttribute('id', 'iframe');
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allowfullscreen', '');
         }
 
         /////////////////////////////////////////////////////////////////

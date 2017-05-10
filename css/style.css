@@ -179,11 +179,11 @@ i {
 
 iframe {
     position: absolute;
-    top: 10%;
-    left: 10%;
+    top: 15%;
+    left: 15%;
     visibility: hidden;
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
 }
 
 

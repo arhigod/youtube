@@ -8,27 +8,6 @@ class Layout {
         this.renderIframe();
     }
 
-    renderIframe() {
-        let iframeBg = document.createElement('div');
-        let iframe = document.createElement('iframe');
-
-        document.body.appendChild(iframeBg);
-        document.body.appendChild(iframe);
-
-        
-        iframeBg.setAttribute('id', 'iframeBg');
-        iframeBg.classList.add('iframeBg');
-        iframeBg.addEventListener('mousedown', e => {
-            iframe.style.visibility = 'hidden';
-            iframe.setAttribute('src', '');
-            iframeBg.style.visibility = 'hidden';
-        });
-
-        iframe.setAttribute('id', 'iframe');
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allowfullscreen', '');    
-    }
-
     renderHeader() {
         let header = document.createElement('header');
         let search = document.createElement('div');
@@ -76,6 +55,27 @@ class Layout {
 
         pages.classList.add('pages');
         pages.setAttribute('id', 'pages');
+    }
+
+    renderIframe() {
+        let iframeBg = document.createElement('div');
+        let iframe = document.createElement('iframe');
+
+        document.body.appendChild(iframeBg);
+        document.body.appendChild(iframe);
+
+        
+        iframeBg.setAttribute('id', 'iframeBg');
+        iframeBg.classList.add('iframeBg');
+        iframeBg.addEventListener('mousedown', e => {
+            iframe.style.visibility = 'hidden';
+            iframe.setAttribute('src', '');
+            iframeBg.style.visibility = 'hidden';
+        });
+
+        iframe.setAttribute('id', 'iframe');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allowfullscreen', '');    
     }
 
     /////////////////////////////////////////////////////////////////
