@@ -88,6 +88,28 @@ var Layout = function () {
             this.renderHeader();
             this.renderMain();
             this.renderFooter();
+            this.renderIframe();
+        }
+    }, {
+        key: 'renderIframe',
+        value: function renderIframe() {
+            var iframeBg = document.createElement('div');
+            var iframe = document.createElement('iframe');
+
+            document.body.appendChild(iframeBg);
+            document.body.appendChild(iframe);
+
+            iframeBg.setAttribute('id', 'iframeBg');
+            iframeBg.classList.add('iframeBg');
+            iframeBg.addEventListener('mousedown', function (e) {
+                iframe.style.visibility = 'hidden';
+                iframe.setAttribute('src', '');
+                iframeBg.style.visibility = 'hidden';
+            });
+
+            iframe.setAttribute('id', 'iframe');
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allowfullscreen', '');
         }
     }, {
         key: 'renderHeader',
@@ -167,11 +189,29 @@ var Layout = function () {
     }, {
         key: 'renderVideo',
         value: function renderVideo(video, videos) {
+            var _this2 = this;
+
             var li = document.createElement('li');
             var channel = document.createElement('div');
             var viewsInfo = document.createElement('div');
 
             videos.appendChild(li);
+
+            li.setAttribute('data-iframe', '' + video.iframe);
+            li.addEventListener('mousedown', function (e) {
+                if (document.getElementById('iframeBg').style.visibility !== 'visible') _this2.isClick = true;
+            });
+            li.addEventListener('mousemove', function (e) {
+                _this2.isClick = false;
+            });
+            li.addEventListener('mouseup', function (e) {
+                if (_this2.isClick) {
+                    _this2.isClick = false;
+                    document.getElementById('iframe').setAttribute('src', e.currentTarget.getAttribute('data-iframe'));
+                    document.getElementById('iframe').style.visibility = 'visible';
+                    document.getElementById('iframeBg').style.visibility = 'visible';
+                }
+            });
 
             this.renderTitle(li, video.title, video.href);
             this.renderImg(li, video.imgUrl);
@@ -651,6 +691,7 @@ var Video = function () {
 
         this.videoId = video.id.videoId;
         this.href = "https://www.youtube.com/watch?v=" + video.id.videoId;
+        this.iframe = "https://www.youtube.com/embed/" + video.id.videoId;
         this.title = video.snippet.title;
         this.imgUrl = video.snippet.thumbnails.medium.url;
         this.channel = video.snippet.channelTitle;

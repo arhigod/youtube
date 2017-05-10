@@ -105,7 +105,7 @@ class Slider {
     }
 
     eventMouseSwipe() {
-        document.getElementById('slides').addEventListener('mousedown', (e) => {
+        document.getElementById('slides').addEventListener('mousedown', e => {
             document.getElementById('slides').style['transition-duration'] = '0s';
             this.mouseDown = true;
             this.startSwipe = e.pageX;
@@ -116,7 +116,7 @@ class Slider {
                 document.getElementById('slides').style.left = this.startSwipeSlidesPos - this.startSwipe + e.pageX + 'px';
             }
         });
-        document.addEventListener('mouseup', (e) => {
+        document.addEventListener('mouseup', e => {
             if (this.mouseDown) {
                 document.getElementById('slides').style['transition-duration'] = '1s';
                 this.mouseDown = false;
@@ -132,7 +132,7 @@ class Slider {
     }
 
     eventTouchSwipe() {
-        document.getElementById('slides').addEventListener('touchstart', (e) => {
+        document.getElementById('slides').addEventListener('touchstart', e => {
             document.getElementById('slides').style['transition-duration'] = '0s';
             this.mouseDown = true;
             this.startSwipe = e.changedTouches[0].pageX;
@@ -143,7 +143,7 @@ class Slider {
                 document.getElementById('slides').style.left = this.startSwipeSlidesPos - this.startSwipe + e.changedTouches[0].pageX + 'px';
             }
         });
-        document.addEventListener('touchend', (e) => {
+        document.addEventListener('touchend', e => {
             if (this.mouseDown) {
                 document.getElementById('slides').style['transition-duration'] = '1s';
                 this.mouseDown = false;

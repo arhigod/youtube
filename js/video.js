@@ -2,6 +2,7 @@ class Video {
     constructor(video) {
         this.videoId = video.id.videoId;
         this.href = `https://www.youtube.com/watch?v=${video.id.videoId}`;
+        this.iframe= `https://www.youtube.com/embed/${video.id.videoId}`;
         this.title = video.snippet.title;
         this.imgUrl = video.snippet.thumbnails.medium.url;
         this.channel = video.snippet.channelTitle;

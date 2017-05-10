@@ -5,6 +5,28 @@ class Layout {
         this.renderHeader();
         this.renderMain();
         this.renderFooter();
+        this.renderIframe();
+    }
+
+    renderIframe() {
+        let iframeBg = document.createElement('div');
+        let iframe = document.createElement('iframe');
+
+        document.body.appendChild(iframeBg);
+        document.body.appendChild(iframe);
+
+        
+        iframeBg.setAttribute('id', 'iframeBg');
+        iframeBg.classList.add('iframeBg');
+        iframeBg.addEventListener('mousedown', e => {
+            iframe.style.visibility = 'hidden';
+            iframe.setAttribute('src', '');
+            iframeBg.style.visibility = 'hidden';
+        });
+
+        iframe.setAttribute('id', 'iframe');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allowfullscreen', '');    
     }
 
     renderHeader() {
@@ -81,6 +103,22 @@ class Layout {
         let viewsInfo = document.createElement('div');
 
         videos.appendChild(li);
+
+        li.setAttribute('data-iframe', `${video.iframe}`);
+        li.addEventListener('mousedown', e => {
+            if(document.getElementById('iframeBg').style.visibility !== 'visible') this.isClick = true;
+        });
+        li.addEventListener('mousemove', e => {
+            this.isClick = false;
+        });
+        li.addEventListener('mouseup', e => {
+            if (this.isClick) {
+                this.isClick = false;
+                document.getElementById('iframe').setAttribute('src', e.currentTarget.getAttribute('data-iframe'));
+                document.getElementById('iframe').style.visibility = 'visible';
+                document.getElementById('iframeBg').style.visibility = 'visible';
+            }
+        });
 
         this.renderTitle(li, video.title, video.href);
         this.renderImg(li, video.imgUrl);

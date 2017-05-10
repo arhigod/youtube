@@ -83,7 +83,6 @@ i {
 
 .title-video {
     position: absolute;
-    z-index: 10;
     width: 250px;
     background: rgba(199, 231, 250, .8);
 }
@@ -167,12 +166,31 @@ i {
     background: #cc181e;
 }
 
+.iframeBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: .7;
+    background-color: black;
+}
+
+iframe {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    visibility: hidden;
+    width: 80%;
+    height: 80%;
+}
+
 
 /*	cc181e	*/
 
-
-@media (max-device-width: 460px){
-	.pages {
-		width: 276px;
-	}
+@media (max-device-width: 460px) {
+    .pages {
+        width: 276px;
+    }
 }
