@@ -28,6 +28,7 @@ i {
     margin: 0 auto;
     flex-flow: row wrap;
     align-content: center;
+    box-shadow: 0 0 15px 0 #fff;
 }
 
 .search-input {
@@ -167,6 +168,8 @@ i {
 
 .pages li:hover {
     background: pink;
+    border-color: #fff;
+    box-shadow: 0 0 15px 0 #fff;
 }
 
 .pages li.active {
