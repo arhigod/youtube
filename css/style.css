@@ -86,6 +86,7 @@ i {
 
 .videos > li:hover {
     border-color: #cc181e;
+    box-shadow: 0 0 30px 0 #cc181e, 0 0 30px 0 #cc181e;
 }
 
 .title-video {
