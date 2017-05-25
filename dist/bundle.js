@@ -336,7 +336,7 @@ var Layout = function () {
         value: function clear() {
             document.getElementById('slides').innerHTML = '';
             document.getElementById('search-input').focus();
-            document.getElementById('slides').style.left = '0px';
+            document.getElementById('slides').style.transform = 'translateX(0px)';
             document.getElementById('pages').innerHTML = '';
         }
     }]);
@@ -503,7 +503,7 @@ var Slider = function () {
             var oldId = this.getActiveSlideNumber();
             var slideLeft = (newId - 1) * document.documentElement.clientWidth;
             this.layout.renderPages(newId, this.slides.length);
-            document.getElementById('slides').style.left = -slideLeft + 'px';
+            document.getElementById('slides').style.transform = 'translateX(' + -slideLeft + 'px)';
             this.loadVideos();
         }
     }, {
@@ -577,11 +577,11 @@ var Slider = function () {
                 document.getElementById('slides').style['transition-duration'] = '0s';
                 _this3.mouseDown = true;
                 _this3.startSwipe = e.pageX;
-                _this3.startSwipeSlidesPos = parseInt(document.getElementById('slides').style.left);
+                _this3.startSwipeSlidesPos = parseInt(document.getElementById('slides').style.transform.substr(11));
             });
             document.getElementById('slides').addEventListener('mousemove', function (e) {
                 if (_this3.mouseDown) {
-                    document.getElementById('slides').style.left = _this3.startSwipeSlidesPos - _this3.startSwipe + e.pageX + 'px';
+                    document.getElementById('slides').style.transform = 'translateX(' + (_this3.startSwipeSlidesPos - _this3.startSwipe + e.pageX) + 'px)';
                 }
             });
             document.addEventListener('mouseup', function (e) {
@@ -607,11 +607,11 @@ var Slider = function () {
                 document.getElementById('slides').style['transition-duration'] = '0s';
                 _this4.mouseDown = true;
                 _this4.startSwipe = e.changedTouches[0].pageX;
-                _this4.startSwipeSlidesPos = parseInt(document.getElementById('slides').style.left);
+                _this4.startSwipeSlidesPos = parseInt(document.getElementById('slides').style.transform.substr(11));
             });
             document.getElementById('slides').addEventListener('touchmove', function (e) {
                 if (_this4.mouseDown) {
-                    document.getElementById('slides').style.left = _this4.startSwipeSlidesPos - _this4.startSwipe + e.changedTouches[0].pageX + 'px';
+                    document.getElementById('slides').style.transform = 'translateX(' + (_this4.startSwipeSlidesPos - _this4.startSwipe + e.changedTouches[0].pageX) + 'px)';
                 }
             });
             document.addEventListener('touchend', function (e) {
@@ -644,7 +644,7 @@ var Slider = function () {
                     });
                 });
                 var newSlideId = Math.floor(leftVideo / _this5.videosInSlide() - 0.01);
-                document.getElementById('slides').style.left = -newSlideId * document.documentElement.clientWidth + 'px';
+                document.getElementById('slides').style.transform = 'translateX(' + -newSlideId * document.documentElement.clientWidth + 'px)';
                 _this5.layout.renderPages(newSlideId + 1, _this5.slides.length);
             });
         }

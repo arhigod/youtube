@@ -58,6 +58,7 @@ i {
     width: 100%;
     height: inherit;
     transition-duration: 1s;
+    transform: translateX(0px);
 }
 
 .slide {

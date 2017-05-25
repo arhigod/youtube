@@ -236,7 +236,7 @@ class Layout {
     clear() {
         document.getElementById('slides').innerHTML = '';
         document.getElementById('search-input').focus();
-        document.getElementById('slides').style.left = '0px';
+        document.getElementById('slides').style.transform = 'translateX(0px)';
         document.getElementById('pages').innerHTML = '';
     }
 

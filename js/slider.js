@@ -51,7 +51,7 @@ class Slider {
         let oldId = this.getActiveSlideNumber();
         let slideLeft = (newId - 1) * document.documentElement.clientWidth;
         this.layout.renderPages(newId, this.slides.length);
-        document.getElementById('slides').style.left = -slideLeft + 'px';
+        document.getElementById('slides').style.transform = `translateX(${-slideLeft}px)`;
         this.loadVideos();
     }
 
@@ -109,11 +109,11 @@ class Slider {
             document.getElementById('slides').style['transition-duration'] = '0s';
             this.mouseDown = true;
             this.startSwipe = e.pageX;
-            this.startSwipeSlidesPos = parseInt(document.getElementById('slides').style.left);
+            this.startSwipeSlidesPos = parseInt(document.getElementById('slides').style.transform.substr(11));
         });
         document.getElementById('slides').addEventListener('mousemove', e => {
             if (this.mouseDown) {
-                document.getElementById('slides').style.left = this.startSwipeSlidesPos - this.startSwipe + e.pageX + 'px';
+                document.getElementById('slides').style.transform = `translateX(${this.startSwipeSlidesPos - this.startSwipe + e.pageX}px)`;
             }
         });
         document.addEventListener('mouseup', e => {
@@ -136,11 +136,11 @@ class Slider {
             document.getElementById('slides').style['transition-duration'] = '0s';
             this.mouseDown = true;
             this.startSwipe = e.changedTouches[0].pageX;
-            this.startSwipeSlidesPos = parseInt(document.getElementById('slides').style.left);
+            this.startSwipeSlidesPos = parseInt(document.getElementById('slides').style.transform.substr(11));
         });
         document.getElementById('slides').addEventListener('touchmove', e => {
             if (this.mouseDown) {
-                document.getElementById('slides').style.left = this.startSwipeSlidesPos - this.startSwipe + e.changedTouches[0].pageX + 'px';
+                document.getElementById('slides').style.transform = `translateX(${this.startSwipeSlidesPos - this.startSwipe + e.changedTouches[0].pageX}px)`;
             }
         });
         document.addEventListener('touchend', e => {
@@ -166,7 +166,7 @@ class Slider {
             this.clearSlides();
             slides.forEach(slide => slide.forEach(video => this.pushVideo(video)));
             let newSlideId = Math.floor(leftVideo / this.videosInSlide() - 0.01);
-            document.getElementById('slides').style.left = -newSlideId * document.documentElement.clientWidth + 'px';
+            document.getElementById('slides').style.transform = `translateX(${-newSlideId * document.documentElement.clientWidth}px)`;
             this.layout.renderPages(newSlideId + 1, this.slides.length);
         });
     }
